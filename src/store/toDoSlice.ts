@@ -1,4 +1,5 @@
 import { createSlice} from '@reduxjs/toolkit';
+import { setItemToLocalStorage } from '../util/localStorage';
 
 export interface ToDoType {id: number,   text: string, done: boolean};
 
@@ -8,7 +9,7 @@ interface initialStateType {
 };
 
 const initialState: initialStateType = {
-    todoList: [{id: 0,   text: 'лорем ипсум и тд', done: false},],
+    todoList: [],
     basket: [],
 }
 
@@ -16,29 +17,65 @@ const todoSlice = createSlice({
     name: 'todo',
     initialState,
     reducers: {
-        addToDo: (state, action) => {
+        addToDo: (state, action: {
+            payload: string;
+        }) => {
             const id = Math.max(...[...state.basket, ...state.todoList].map((elem) => elem.id)) + 1;
-            state.todoList.push({id,   text: action.payload, done: false})
+            state.todoList.push({id,   text: action.payload, done: false});
+            setItemToLocalStorage('todoList', state.todoList);
         },
-        removeToDo: (state, action) => {
-            state.basket= [...state.basket, ...state.todoList.filter((elem)=> elem.id === action.payload)]
-            state.todoList= state.todoList.filter((elem)=> elem.id !== action.payload)
+
+        setToDo: (state, action: {
+            payload: ToDoType[];
+        }) => {
+            state.todoList = action.payload;
+        },
+
+  
+
+        removeToDo: (state, action: {
+            payload: number;
+        }) => {
+            state.basket= [...state.basket, ...state.todoList.filter((elem)=> elem.id === action.payload)];
+            state.todoList= state.todoList.filter((elem)=> elem.id !== action.payload);
+            setItemToLocalStorage('todoList', state.todoList);
+            setItemToLocalStorage('basket', state.basket);
         },
         clearList: (state) => {
-            state.basket= [...state.basket, ...state.todoList]
+            state.basket= [...state.basket, ...state.todoList];
             state.todoList = [];
+            setItemToLocalStorage('todoList', state.todoList);
+            setItemToLocalStorage('basket', state.basket);
         },
-        setStatus: (state, action ) => {
+        setStatus: (state, action: {
+            payload: number;
+        }) => {
             state.todoList= state.todoList.map((elem)=> {
                 if(elem.id === action.payload) {
-                  elem.done = !elem.done
+                  elem.done = !elem.done;
                 }
-                return elem
+                return elem;
             })
-        }   
+            setItemToLocalStorage('todoList', state.todoList);
+        },
+        getBackFromBasket: (state, action: {
+            payload: number;
+        }) =>  {
+            state.todoList = [...state.basket.filter((elem)=> elem.id === action.payload), ...state.todoList];
+            state.basket = state.basket.filter((elem)=> elem.id !== action.payload);
+            setItemToLocalStorage('todoList', state.todoList);
+            setItemToLocalStorage('basket', state.basket);
+        },
+
+        setBasket: (state, action: {
+            payload: ToDoType[];
+        }) => {
+            state.basket = action.payload;
+        },
+
     }
 })
 
-export const {addToDo, removeToDo, setStatus, clearList} = todoSlice.actions;
+export const {addToDo, removeToDo, setStatus, clearList, getBackFromBasket, setToDo, setBasket} = todoSlice.actions;
 
 export default todoSlice.reducer;

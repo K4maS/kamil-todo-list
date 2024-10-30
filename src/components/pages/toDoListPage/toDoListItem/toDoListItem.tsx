@@ -7,15 +7,24 @@ import clsx from 'clsx';
 interface ItemType extends ToDoType {
   onDelete: () => void;
   onDone: () => void;
+  onBasket: () => void;
+  basket?: boolean;
 }
 
-const Item: React.FC<ItemType> = ({ text, done, onDelete, onDone }) => {
+const Item: React.FC<ItemType> = ({ text, done, onDelete, onDone, onBasket, basket = true }) => {
   return (
     <li className={clsx(styles.item, done ? styles.done : '')}>
       <h2 className={styles.text}>{text}</h2>
+
       <div className={styles.btns}>
-        <Button text={!done ? 'Выполнено' : 'Не выполнено'} onClick={onDone} />
-        <Button text={'Удалить'} color={'red'} onClick={onDelete} />
+        {!basket ? (
+          <>
+            <Button text={!done ? 'Выполнено' : 'Не выполнено'} onClick={onDone} />
+            <Button text={'Удалить'} color={'red'} onClick={onDelete} />
+          </>
+        ) : (
+          <Button text={'Восстановить'} onClick={onBasket} />
+        )}
       </div>
     </li>
   );

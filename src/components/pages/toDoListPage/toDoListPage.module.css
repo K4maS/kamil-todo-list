@@ -6,7 +6,19 @@
 
 .top {
   display: flex;
+  justify-content: space-between;
   gap: 20px;
+}
+
+.topRight {
+  height: 100%;
+  display: flex;
+  gap: 10px;
+}
+
+.topLeft {
+  display: flex;
+  gap: 10px;
 }
 
 .list {
