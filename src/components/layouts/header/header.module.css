@@ -1,0 +1,13 @@
+.header {
+  background-color: aliceblue;
+  color: black;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo svg {
+  height: 50px;
+}

@@ -1,0 +1,23 @@
+.item {
+  display: flex;
+  justify-content: space-between;
+  background-color: aliceblue;
+  align-items: center;
+  padding: 20px;
+  border-radius: 20px;
+  color: black;
+}
+
+.text {
+  padding: 0;
+  margin: 0;
+}
+
+.item.done {
+  background-color: aqua;
+}
+
+.btns {
+  display: flex;
+  gap: 20px;
+}
