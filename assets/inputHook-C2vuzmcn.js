@@ -1,0 +1,1 @@
+import{j as o,h as a}from"./index-CdjeZczH.js";const p="_input_1d41w_1",r={input:p},i=({onInput:n,value:t,placeholder:e,type:s,...u})=>o.jsx("input",{className:r.input,onInput:n,placeholder:e,value:t,type:s,...u}),l=()=>{const[n,t]=a.useState("");return{value:n,onInput:s=>{const u=s.target;s&&t(u.value)},setValue:t}};export{i as I,l as u};
