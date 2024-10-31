@@ -32,7 +32,7 @@ export const LoginPage = () => {
       <form className={styles.form} action='POST' onSubmit={onSubmit}>
         <Input type={'text'} placeholder='Логин' onInput={loginInput.onInput} value={loginInput.value} />
         <Input type={'password'} placeholder='Пароль' onInput={passwordInput.onInput} value={passwordInput.value} />
-                <Button text='Войти' type={'submit'} />
+        <Button disabled={!(loginInput.value && passwordInput.value)} text='Войти' type={'submit'} />
         {error && <p className={styles.error}>{error}</p>}
       </form>
     </div>

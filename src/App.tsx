@@ -19,7 +19,7 @@ function App() {
     const localName = getItemFromLocalStorage('userName') || '';
     setName(localName);
     setAuth(localIsAuth);
-  }, []);
+  }, [setAuth, setName]);
 
   useEffect(() => {
     if (isAuth) {

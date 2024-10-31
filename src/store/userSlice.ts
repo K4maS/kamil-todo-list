@@ -42,7 +42,7 @@ const userSlice = createSlice({
           }
           else {
             state.error = 'По секрету скажу что Login: admin, Password: admin'
-          }
+            }
         },
 
         doLogaut: (state) => {

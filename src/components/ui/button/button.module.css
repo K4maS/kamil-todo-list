@@ -16,3 +16,8 @@
   /* opacity: 0.6; */
   border: 1px solid #fff;
 }
+
+.btn.disabled {
+  background-color: gray;
+  cursor: default;
+}
