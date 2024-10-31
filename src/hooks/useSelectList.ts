@@ -45,7 +45,7 @@ export function useSelectList() {
     );
   
     const btnsList = listsBtns.map((elem) => (
-      Button( {active: listType === elem.type, onClick:() => onSelect(elem.type), text: elem.name} )
+      Button( {active: listType === elem.type, onClick:() => onSelect(elem.type), text: `${elem.name} (${elem.action.length})`} )
     ))
 
     return { list, listType,  btnsList };

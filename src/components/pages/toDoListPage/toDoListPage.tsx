@@ -39,7 +39,7 @@ export const ToDoListPage = () => {
       <div className={styles.top}>
         <div className={styles.topLeft}>
           <Input value={value} placeholder='Моя задача' onInput={onInput} />
-          <Button onClick={addElem} text={'Добавить'} />
+          <Button disabled={!value} onClick={addElem} text={'Добавить'} />
           <Button onClick={setDeleteAll} text={'Переместить все в корзину'} color='red' />
         </div>
         <div className={styles.topRight}>{btnsList}</div>
