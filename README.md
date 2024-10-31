@@ -1,50 +1,39 @@
-# React + TypeScript + Vite
+# To-Do List
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Приложение **To-Do List** — это простое и удобное приложение для управления задачами, разработанное с использованием библиотеки **React** и языка **TypeScript**. Приложение позволяет пользователям легко добавлять, удалять и управлять своими задачами, а также обеспечивает авторизацию.
 
-Currently, two official plugins are available:
+## Основные функции
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Обязательный функционал
 
-## Expanding the ESLint configuration
+- **Добавление задачи**: Пользователи могут добавлять новые задачи в список дел.
+- **Удаление задачи**: Возможность удаления отдельных задач из списка.
+- **Удаление всех задач**: Удаление всех задач сразу из списка.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Дополнительный функционал
 
-- Configure the top-level `parserOptions` property like this:
+- **Разделы задач**:
+  - **Текущие дела**: Отображает все активные задачи.
+  - **Все дела**: Полный список всех задач, как выполненных, так и невыполненных.
+  - **Выполненные дела**: Отображает только завершенные задачи.
+  - **Корзина**: Позволяет восстановить удаленные задачи (если реализовано).
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- **Страница авторизации**:
+  - Отдельный маршрут для страницы входа.
+  - После авторизации пользователи остаются на странице, даже после перезагрузки.
+  - Проверка на логин: `admin` и пароль: `admin`. (JWT не используется)
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+- **Сохранение данных**:
+  - Данные задач сохраняются в локальном хранилище браузера, что позволяет пользователю сохранять свои задачи между сессиями.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## Использованные технологии
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+- **React**: Библиотека для построения пользовательских интерфейсов.
+- **TypeScript**: Язык программирования, расширяющий JavaScript типами.
+- **Redux Toolkit**: Инструмент для управления состоянием приложения.
+
+## Установка
+
+1. Клонируйте репозиторий:
+   ```bash
+   git clone git push --set-upstream https://github.com/K4maS/kamil-todo-list.git master 
