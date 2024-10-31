@@ -20,9 +20,14 @@ const todoSlice = createSlice({
         addToDo: (state, action: {
             payload: string;
         }) => {
-            const id = Math.max(...[...state.basket, ...state.todoList].map((elem) => elem.id)) + 1;
+
+            const maxId = Math.max(...[...state.basket, ...state.todoList].map((elem) => elem.id));
+            const id = maxId >= 0 ? maxId + 1 : 0;
+
+            console.log(id)
             state.todoList.push({id,   text: action.payload, done: false});
             setItemToLocalStorage('todoList', state.todoList);
+            
         },
 
         setToDo: (state, action: {

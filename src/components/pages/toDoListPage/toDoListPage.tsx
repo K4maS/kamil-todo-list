@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useStoreHooks } from '../../../hooks/storeHooks';
 import { Button } from '../../ui/button/button';
 import { Input } from '../../ui/input/input';
@@ -6,44 +6,28 @@ import { ToDoListItem } from './toDoListItem/toDoListItem';
 import styles from './toDoListPage.module.css';
 import { ListType, useSelectList } from '../../../hooks/useSelectList';
 import { getItemFromLocalStorage } from '../../../util/localStorage';
+import { useInput } from '../../../hooks/inputHook';
 
 export const ToDoListPage = () => {
   const { addToList, setDone, setDelete, setDeleteAll, getFromBasket, setBasketList, setTodoList } = useStoreHooks();
-  const [toDoText, setTodoText] = useState<string>('');
 
-  const { list, setListType, listType } = useSelectList();
+  const { onInput, value, setValue } = useInput();
+
+  const { list, listType, btnsList } = useSelectList();
 
   useEffect(() => {
     const localBasket = getItemFromLocalStorage('basket') || [];
     const localList = getItemFromLocalStorage('todoList') || [];
     setTodoList(localList);
-    setBasketList(localBasket)
+    setBasketList(localBasket);
   }, []);
 
   const addElem = () => {
-    if (toDoText) {
-      addToList(toDoText);
+    if (value) {
+      addToList(value);
     }
-    setTodoText('');
+    setValue('');
   };
-
-  const onInput = (e: React.FormEvent<HTMLInputElement>) => {
-    const target = e.target as HTMLInputElement;
-    if (e) setTodoText(target.value);
-  };
-
-  const onSelectMainList = useCallback(() => {
-    setListType(ListType.list);
-  }, [setListType]);
-  const onSelectDoneList = useCallback(() => {
-    setListType(ListType.doneList);
-  }, [setListType]);
-  const onSelectInProgressList = useCallback(() => {
-    setListType(ListType.inProcessList);
-  }, [setListType]);
-  const onSelectBasketList = useCallback(() => {
-    setListType(ListType.basketList);
-  }, [setListType]);
 
   const handleSetDone = useCallback((id: number) => setDone(id), [setDone]);
   const handleSetDelete = useCallback((id: number) => setDelete(id), [setDelete]);
@@ -51,18 +35,14 @@ export const ToDoListPage = () => {
 
   return (
     <div className={styles.main}>
+      <h1 className={styles.title}>Мои задачи</h1>
       <div className={styles.top}>
         <div className={styles.topLeft}>
-          <Input value={toDoText} placeholder='Моя задача' onInput={onInput} />
+          <Input value={value} placeholder='Моя задача' onInput={onInput} />
           <Button onClick={addElem} text={'Добавить'} />
           <Button onClick={setDeleteAll} text={'Переместить все в корзину'} color='red' />
         </div>
-        <div className={styles.topRight}>
-          <Button active={listType === ListType.list} onClick={onSelectMainList} text={'Все'} />
-          <Button active={listType === ListType.doneList} onClick={onSelectDoneList} text={'Готовые'} />
-          <Button active={listType === ListType.inProcessList} onClick={onSelectInProgressList} text={'В процессе'} />
-          <Button active={listType === ListType.basketList} onClick={onSelectBasketList} text={'Корзина'} />
-        </div>
+        <div className={styles.topRight}>{btnsList}</div>
       </div>
 
       {list.length > 0 ? (
@@ -88,3 +68,5 @@ export const ToDoListPage = () => {
     </div>
   );
 };
+
+export default ToDoListPage;

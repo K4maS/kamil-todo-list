@@ -3,7 +3,11 @@
   border-radius: 20px;
   padding: 20px;
 }
-
+.title {
+  margin: 0;
+  margin-bottom: 20px;
+  text-align: center;
+}
 .top {
   display: flex;
   justify-content: space-between;

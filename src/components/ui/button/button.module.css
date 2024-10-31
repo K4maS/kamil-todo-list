@@ -5,6 +5,7 @@
   padding: 10px 20px;
   border-radius: 10px;
   cursor: pointer;
+  min-height: 35px;
 }
 
 .red {

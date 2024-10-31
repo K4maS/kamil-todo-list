@@ -7,7 +7,20 @@
   justify-content: space-between;
   align-items: center;
 }
+.logoBlock {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 24px;
+  color: black;
+}
 
-.logo svg {
-  height: 50px;
+.authBtn {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.userName {
+  margin: 0;
 }
